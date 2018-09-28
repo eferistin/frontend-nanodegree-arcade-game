@@ -1,3 +1,9 @@
+//seting players boundaries
+var myleft=true;
+var myright= true;
+var myRise= true;
+var myFall= true;
+
 // Enemies our player must avoid
 var Enemy = function(x,y) {
     // Variables applied to each of our instances go here,
@@ -69,19 +75,66 @@ allEnemies.push(bug1,bug2,bug3);
 Player.prototype.handleInput= function(arrowKeyDirections){
     switch(arrowKeyDirections){
         case "left":
-            this.x -=55;
+            amIinbound();           
+            if(myleft===true){
+            this.x -=20;
+        }
             break;
         case "up":
-            this.y -=65;
+            amIinbound();            
+            if( myRise===true){
+            this.y -=35;
+        }
             break;
         case "right":
-            this.x +=55;
+            amIinbound();
+            if(myright===true){
+            this.x +=20;
+        }
             break;
         case "down":
-            this.y +=65;
+            amIinbound();            
+            if( myFall===true){
+            this.y +=35;
+        }
             break;
     }
 };
+
+// verify if player is within boundaries
+Player.prototype.canImove= function (){
+  
+    if(this.x <0 ){
+        // inLimits=false; 
+        myright=true;
+        myleft=false;
+    }
+    else if(this.y<25){
+        // inLimits=false; 
+        myRise =false;
+        myFall=true;
+    }
+    else if(this.x >395 ){
+        // inLimits=false; 
+        myright=false;
+        myleft=true;
+    }
+    else if(this.y>410){
+        // inLimits=false;
+        myRise=true;
+        myFall=false;
+    }
+    else{
+        inLimits=true; 
+        myRise=true; 
+        myFall=true; 
+        myright=true; 
+        myleft=true; 
+    }
+    // return inLimits;
+}
+
+var amIinbound = player.canImove.bind(player);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
