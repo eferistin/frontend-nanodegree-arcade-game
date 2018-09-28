@@ -65,6 +65,23 @@ var bug3 = new Enemy(0,bugStartPos3);
 
 allEnemies.push(bug1,bug2,bug3);
 
+//create function for player to move
+Player.prototype.handleInput= function(arrowKeyDirections){
+    switch(arrowKeyDirections){
+        case "left":
+            this.x -=55;
+            break;
+        case "up":
+            this.y -=65;
+            break;
+        case "right":
+            this.x +=55;
+            break;
+        case "down":
+            this.y +=65;
+            break;
+    }
+};
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
