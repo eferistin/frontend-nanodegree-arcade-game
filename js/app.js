@@ -26,10 +26,24 @@ Enemy.prototype.render = function() {
 // a handleInput() method.
 
 
+var Player = function() {
+    this.sprite = 'images/char-pink-girl.png';
+};
+
+Player.prototype.update=function(dt){
+
+};
+
+// Draw the enemy on the screen, required method for game
+Player.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-
+var allEnemies= []; //=Enemy();
+var player = new Player();//Player();
 
 
 // This listens for key presses and sends the keys to your
