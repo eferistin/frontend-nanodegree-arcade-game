@@ -47,7 +47,23 @@ Player.prototype.render = function() {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 var allEnemies= []; //=Enemy();
-var player = new Player(150, 420);//Player();
+var player = new Player(175, 410);//Player();
+
+//create random start position for bugs.
+var bugStartPos1 =Math.random()*100;
+var bugStartPos2 =Math.random()*200 +45;
+var bugStartPos3 =Math.random()*250 + bugStartPos2;
+
+// to test- determine of bug if was off canvas
+console.log("I am bug 1 "+bugStartPos1);
+console.log("I am bug 2 "+bugStartPos2);
+console.log("I am bug 3 "+bugStartPos3);
+
+var bug1 = new Enemy(0,bugStartPos1);
+var bug2 = new Enemy(0,bugStartPos2);
+var bug3 = new Enemy(0,bugStartPos3);
+
+allEnemies.push(bug1,bug2,bug3);
 
 
 // This listens for key presses and sends the keys to your
