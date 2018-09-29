@@ -22,12 +22,51 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+    var differHeight;
+    var mySpeed;
+    var xFactor;
+    var speedChange =[40,-45,110];
+    if (this.x>490){// if enemies goes off screen reset position for an infinite loop 
+
+        differHeight= 100*Math.random();// Wiill cause bug to reenter screen at random points of time after it first disappear on the right.
+        this.x =-80;
+        this.y= Math.random()*100+ differHeight*1.2;//change the location the bug reaapears
+        // console.log(this);//testing
+
+    }else
+    {
+        for(var i=0; i<speedChange.length; i++){
+            if(i===3){
+                i=i%3;
+            }
+            xFactor=speedChange[i];
+        }
+        mySpeed= Math.random()*100 +xFactor;
+        this.x +=mySpeed*dt;// makes bug walk
+    }
+    
+
+    // Check for collision
+    checkCollisions= function(){
+        for(var enemy in allEnemies){
+            if(enemy.y >=player.y -40|| enemy.y<=player.y-25){
+
+                if(enemy.x<=player.x-70 ||enemy.x>=player.x-70){
+                    player(175, 410);
+                 }
+            }
+
+        }
+
+//  return"";
+    };
 };
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
+
 
 // Now write your own player class
 // This class requires an update(), render() and
@@ -52,8 +91,8 @@ Player.prototype.render = function() {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-var allEnemies= []; //=Enemy();
-var player = new Player(175, 410);//Player();
+var allEnemies= []; 
+var player = new Player(175, 410);
 
 //create random start position for bugs.
 var bugStartPos1 =Math.random()*100;
@@ -65,9 +104,10 @@ console.log("I am bug 1 "+bugStartPos1);
 console.log("I am bug 2 "+bugStartPos2);
 console.log("I am bug 3 "+bugStartPos3);
 
+//Helps bug initially come on screen at different times
 var bug1 = new Enemy(0,bugStartPos1);
-var bug2 = new Enemy(0,bugStartPos2);
-var bug3 = new Enemy(0,bugStartPos3);
+var bug2 = new Enemy(-40,bugStartPos2);
+var bug3 = new Enemy(-55,bugStartPos3);
 
 allEnemies.push(bug1,bug2,bug3);
 
@@ -105,33 +145,32 @@ Player.prototype.handleInput= function(arrowKeyDirections){
 Player.prototype.canImove= function (){
   
     if(this.x <0 ){
-        // inLimits=false; 
         myright=true;
         myleft=false;
     }
-    else if(this.y<25){
-        // inLimits=false; 
-        myRise =false;
+    
+    else if(this.y<20){
+        myRise=false;
         myFall=true;
+        
+        // if(this.y=-10){
+        //     alert("You won.");
+        // }
     }
     else if(this.x >395 ){
-        // inLimits=false; 
         myright=false;
         myleft=true;
     }
-    else if(this.y>410){
-        // inLimits=false;
+    else if(this.y>375){
         myRise=true;
         myFall=false;
     }
     else{
-        inLimits=true; 
         myRise=true; 
         myFall=true; 
         myright=true; 
         myleft=true; 
     }
-    // return inLimits;
 }
 
 var amIinbound = player.canImove.bind(player);
