@@ -14,6 +14,8 @@ var Enemy = function(x,y) {
     this.x = x;
     this.y = y;
     this.sprite = 'images/enemy-bug.png';
+    this.width = 95;
+    this.height = 65;
 };
 
 // Update the enemy's position, required method for game
@@ -45,21 +47,16 @@ Enemy.prototype.update = function(dt) {
         this.x +=mySpeed*dt;// makes bug walk
     }
     
-
     // Check for collision
-    checkCollisions= function(){
-        for(var enemy in allEnemies){
-            if(enemy.y >=player.y -40|| enemy.y<=player.y-25){
+    var myCollision =collides(player, this);
+    if (myCollision===true){
+        player.x=200;
+        player.y=410;
+    }
+    else{
+        myCollision=false;
+    }
 
-                if(enemy.x<=player.x-70 ||enemy.x>=player.x-70){
-                    player(175, 410);
-                 }
-            }
-
-        }
-
-//  return"";
-    };
 };
 
 // Draw the enemy on the screen, required method for game
@@ -77,6 +74,8 @@ var Player = function(x, y, sprite="images/char-pink-girl.png") {
     this.x = x;
     this.y = y;
     this.sprite = sprite;
+    this.width = 65;
+    this.height = 75;
 };
 
 Player.prototype.update=function(dt){
@@ -174,6 +173,14 @@ Player.prototype.canImove= function (){
 }
 
 var amIinbound = player.canImove.bind(player);
+
+function collides(player, enemy)
+{
+    if (player.x < enemy.x + enemy.width &&
+        player.x + player.width > enemy.x &&
+        player.y < enemy.y + enemy.height &&
+        player.y + player.height > enemy.y) return true;
+}
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
