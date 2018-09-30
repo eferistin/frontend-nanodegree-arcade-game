@@ -14,8 +14,8 @@ var Enemy = function(x,y) {
     this.x = x;
     this.y = y;
     this.sprite = 'images/enemy-bug.png';
-    this.width = 95;
-    this.height = 65;
+    this.width = 80;
+    this.height = 78;
 };
 
 // Update the enemy's position, required method for game
@@ -74,8 +74,8 @@ var Player = function(x, y, sprite="images/char-pink-girl.png") {
     this.x = x;
     this.y = y;
     this.sprite = sprite;
-    this.width = 65;
-    this.height = 75;
+    this.width = 40;
+    this.height = 65;
 };
 
 Player.prototype.update=function(dt){
@@ -98,7 +98,7 @@ var bugStartPos1 =Math.random()*100;
 var bugStartPos2 =Math.random()*200 +45;
 var bugStartPos3 =Math.random()*250 + bugStartPos2;
 
-// to test- determine of bug if was off canvas
+// to test- determine location of bug, if was off canvas
 console.log("I am bug 1 "+bugStartPos1);
 console.log("I am bug 2 "+bugStartPos2);
 console.log("I am bug 3 "+bugStartPos3);
@@ -152,9 +152,9 @@ Player.prototype.canImove= function (){
         myRise=false;
         myFall=true;
         
-        // if(this.y=-10){
-        //     alert("You won.");
-        // }
+        if(this.y=-10){
+            alert("You won.");
+        }
     }
     else if(this.x >395 ){
         myright=false;
