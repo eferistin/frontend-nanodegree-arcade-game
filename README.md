@@ -11,6 +11,18 @@ The game can be played on following link.
 [PLAY](https://eferistin.github.io/frontend-nanodegree-arcade-game/ )
 
 
+## How to download/clone game to local machine
+
+1. Click on clone or download tab click on clipboard (to copy url).
+2. On your local machine, once inside the folder of your choice, on the terminal or if using windows on git bash type the following. 
+    `git clone url`
+    or 
+    `git clone https://github.com/eferistin/frontend-nanodegree-arcade-game.git`
+    and enter.
+3. Type `start index.html`. The browser will launch and the game will begin.
+4. If you wish to alter the game, open the folder into the IDE of your choice.
+
+
 ## Resources
 
 https://zoom.us/recording/play/aulotDlzKFegQFIJTaTzKgWvNkVsYtlwO454vL1UPE1Cm6lOUBQCtfVurPOIAGAS?startTime=1529542978000hj
